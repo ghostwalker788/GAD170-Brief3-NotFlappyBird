@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Goal
   - Piller
+  - wall
+  - Creater
+  - Deleter
   layers:
   - Default
   - TransparentFX

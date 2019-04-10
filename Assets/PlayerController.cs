@@ -10,10 +10,13 @@ public class PlayerController : MonoBehaviour
     public UnityEvent OnHitGoal;
     public float RFVV = 1;
     public float PXP;
+
+    private GameManager m_currentGameManager;
     // Start is called before the first frame update
     void Start()
     {
-        
+        //getign the first instance of the game manager script
+        m_currentGameManager = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -46,22 +49,35 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider piller)
     {
         //when we enter the triger to play dead sound
-        Debug.Log("you hit a piller");
-        OnHitCylinder?.Invoke();
+        Debug.Log("We made it!");
+        m_currentGameManager.onPickUp?.Invoke();
+        Destroy(piller.gameObject);
     }
-
-    private void OnTriggerEnter(Collider Goal)
-    {
+    
+    //private void OnTriggerEnter(Collider Goal)
+    //{
         //when we enter the triger to play dead sound
-        Debug.Log("you Got a Point");
-        OnHitGoal?.Invoke();
-    }
+    //    Debug.Log("you Got a Point");
+//OnHitGoal?.Invoke();
+    //}
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("We hit " + collision.gameObject.name);
+        
 
-        OnHitSomething?.Invoke();
+        if (collision.gameObject.tag == "wall")
+        {
+            Debug.Log("Can't go up somthing stops you");
+        }
+        if (collision.gameObject.tag == "Piller")
+        {
+            Debug.Log("We hit a piller");
+            OnHitSomething?.Invoke();
+        }
+        if (collision.gameObject.tag == "Goal")
+        {
+
+        }
     }
 
 }

@@ -16,10 +16,8 @@ public class CAMSCROLL : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(myTrans.position.x);
+        //Debug.Log(myTrans.position.x);
         Vector3 CAMPOS = new Vector3(myTrans.position.x,5,0);
         transform.position = CAMPOS;
-
-
     }
 }
