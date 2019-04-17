@@ -9,6 +9,8 @@ TagManager:
   - wall
   - Creater
   - Deleter
+  - Fire
+  - ground
   layers:
   - Default
   - TransparentFX

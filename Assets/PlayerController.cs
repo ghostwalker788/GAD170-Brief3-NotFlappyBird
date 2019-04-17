@@ -11,8 +11,25 @@ public class PlayerController : MonoBehaviour
     public float RFVV = 1;
     public float PXP;
 
+    public Transform boomspot;
+    public List<GameObject> myExplotionCount = new List<GameObject>();
+
     private GameManager m_currentGameManager;
     // Start is called before the first frame update
+
+
+    public GameObject myExplotion;
+
+
+    private void OnEnable()
+    {
+        
+    }
+    private void OnDisable()
+    {
+        
+    }
+
     void Start()
     {
         //getign the first instance of the game manager script
@@ -73,11 +90,33 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("We hit a piller");
             OnHitSomething?.Invoke();
+            Invoke("Explotion", 0.0f);
         }
         if (collision.gameObject.tag == "Goal")
         {
-
+            Debug.Log("We made it!");
+            m_currentGameManager.onPickUp?.Invoke();
+        }
+        if (collision.gameObject.tag == "ground")
+        {
+            Debug.Log("We hit a piller");
+            OnHitSomething?.Invoke();
+            Invoke("Explotion", 0.0f);
         }
     }
 
+    private void Explotion()
+    {
+       GameObject clone = Instantiate(myExplotion, transform.position, Quaternion.identity);
+        myExplotionCount.Add(clone);
+        Invoke("CleanUpExplotion",2.0f);
+    }
+    private void CleanUpExplotion()
+    {
+        if (myExplotionCount.Count > 0)
+        {
+            Destroy(myExplotionCount[0]);
+            myExplotionCount.RemoveAt(0);
+        }
+    }
 }

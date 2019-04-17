@@ -19,11 +19,11 @@ public class Destroyer : MonoBehaviour
     {
         if (collision.gameObject.tag == "Piller")
         {
-            Destroy(collision.gameObject);
+            Destroy(collision.transform.root.gameObject);
         }
         if (collision.gameObject.tag == "Goal")
         {
-            Destroy(collision.gameObject);
+            Destroy(collision.transform.root.gameObject);
         }
     }
 }
